@@ -18,7 +18,10 @@ export default {
       },
       fontSize: {
         md: '1.4rem',
-        lg: '2.8rem',
+        lg: '2rem',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
       },
     },
   },
