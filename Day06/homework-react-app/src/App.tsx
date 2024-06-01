@@ -1,3 +1,10 @@
+import Button from './components/Button';
+
 export default function App() {
-  return <div>App</div>;
+  return (
+    <>
+      <Button />
+      <Button></Button>
+    </>
+  );
 }
