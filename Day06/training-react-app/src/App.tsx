@@ -5,6 +5,7 @@ export default function App() {
   return (
     <div className="wrapper">
       <ModuleButton
+        type="button"
         style={{
           width: '7.7rem',
           backgroundColor: '#4F4F4F',
@@ -14,6 +15,7 @@ export default function App() {
         Add
       </ModuleButton>
       <ModuleButton
+        type="button"
         style={{
           width: '7.7rem',
           backgroundColor: '#ED4848',
@@ -23,6 +25,7 @@ export default function App() {
         Cancel
       </ModuleButton>
       <ModuleButton
+        type="button"
         style={{
           width: '7.7rem',
           backgroundColor: '#7D48ED',
