@@ -1,0 +1,23 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  font-size: 62.5%;
+}
+
+body {
+	font-size: 1.6rem;
+  background-color:#000;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+button {
+  border: none; 
+  outline: none;
+  padding: 0;
+}
