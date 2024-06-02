@@ -19,8 +19,12 @@ export default function Login() {
         </CheckBox>
       </form>
       <div className="btn-wrapper">
-        <Button btnStyleType="full">Log In</Button>
-        <Button btnStyleType="line">Go To Sing up</Button>
+        <Button type="button" btnStyleType="full">
+          Log In
+        </Button>
+        <Button type="button" btnStyleType="line">
+          Go To Sing up
+        </Button>
       </div>
     </section>
   );

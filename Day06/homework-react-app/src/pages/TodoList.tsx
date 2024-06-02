@@ -1,6 +1,6 @@
-import Button from '../components/Button';
-import TextField from '../components/TextField';
 import Title from '../components/Title';
+import TextField from '../components/TextField';
+import Button from '../components/Button';
 import Todo from '../components/Todo';
 
 export default function TodoList() {
@@ -12,7 +12,7 @@ export default function TodoList() {
       </div>
       <div className="flex items-center justify-center gap-[0.8rem] mb-[1.6rem]">
         <TextField style={{ flex: '1' }} placeholder="Enter Todo List" />
-        <Button style={{ width: '7.7rem' }} btnStyleType="full">
+        <Button type="button" style={{ width: '7.7rem' }} btnStyleType="full">
           Add
         </Button>
       </div>

@@ -20,8 +20,12 @@ export default function Sign() {
         </CheckBox>
       </form>
       <div className="btn-wrapper">
-        <Button btnStyleType="full">Sign In</Button>
-        <Button btnStyleType="line">Go To Log In</Button>
+        <Button type="button" btnStyleType="full">
+          Sign In
+        </Button>
+        <Button type="button" btnStyleType="line">
+          Go To Log In
+        </Button>
       </div>
     </section>
   );
