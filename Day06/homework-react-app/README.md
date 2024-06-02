@@ -128,11 +128,15 @@ plugins: [
 </label>
 ```
 
+<br/>
+
 ## 🤗 결과물
 
 |               Login                |               Sign               |                 TodoList                 |
 | :--------------------------------: | :------------------------------: | :--------------------------------------: |
-| ![Login UI](./image_src/login.png) | ![Sign UI](./image_src/sing.png) | ![TodoList UI](./image_src/todolist.png) |
+| ![Login UI](./image_src/login.png) | ![Sign UI](./image_src/sign.png) | ![TodoList UI](./image_src/todolist.png) |
+
+<br/>
 
 ## 🔥 과제 회고
 
