@@ -40,6 +40,10 @@ export default {
         '.btn-wrapper': {
           '@apply flex flex-col gap-[1.6rem] mt-[3.2rem]': '',
         },
+        '.icon-line': {
+          '@apply absolute top-[50%] left-[50%] translate-x-[-50%]  translate-y-[-50%] block w-[0.2rem] h-[1.8rem] bg-primary':
+            '',
+        },
       });
     },
   ],

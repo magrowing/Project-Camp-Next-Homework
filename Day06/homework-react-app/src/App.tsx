@@ -1,11 +1,13 @@
 import Login from './pages/Login';
 import Sign from './pages/Sign';
+import TodoList from './pages/TodoList';
 
 export default function App() {
   return (
     <article className="flex items-center justify-center h-[100vh]">
-      <Login />
-      <Sign />
+      {/* <Login /> */}
+      {/* <Sign /> */}
+      <TodoList />
     </article>
   );
 }
