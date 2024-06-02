@@ -1,16 +1,14 @@
 import { ReactNode } from 'react';
 
+import { RecordType } from '../types';
+
 type TitleProps = {
   type: string;
   children: ReactNode;
 };
 
-type TTypeVariants = {
-  [key: string]: string;
-};
-
 export default function MainTitle({ children, type }: TitleProps) {
-  const typeVariants: TTypeVariants = {
+  const typeVariants: RecordType = {
     main: 'text-lg font-bold mb-[1rem]',
     sub: 'text-md mb-[1rem] mb-[2rem]',
   };
