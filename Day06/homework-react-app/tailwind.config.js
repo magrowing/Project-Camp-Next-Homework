@@ -31,6 +31,15 @@ export default {
         '.bold': {
           '@apply font-bold': '',
         },
+        '.section-wrapper': {
+          '@apply w-[37.5rem] px-[2.5rem] py-[4rem] bg-white rounded-md': '',
+        },
+        '.form-wrapper': {
+          '@apply flex flex-col gap-[1.6rem]': '',
+        },
+        '.btn-wrapper': {
+          '@apply flex flex-col gap-[1.6rem] mt-[3.2rem]': '',
+        },
       });
     },
   ],

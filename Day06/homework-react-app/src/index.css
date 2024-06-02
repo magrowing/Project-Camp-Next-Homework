@@ -10,7 +10,7 @@
     @apply text-[62.5%] font-sans;
   }
   body {
-    @apply text-[1.6rem];
+    @apply text-[1.6rem] bg-black;
   }
 
   input, button {
