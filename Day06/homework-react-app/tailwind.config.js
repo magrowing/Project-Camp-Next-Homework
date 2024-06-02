@@ -13,7 +13,7 @@ export default {
         opacity10: '#35383E1A',
       },
       borderRadius: {
-        sm: '0.4rme',
+        sm: '0.4rem',
         md: '0.8rem',
       },
       fontSize: {
@@ -25,5 +25,13 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    ({ addUtilities }) => {
+      addUtilities({
+        '.bold': {
+          '@apply font-bold': '',
+        },
+      });
+    },
+  ],
 };
