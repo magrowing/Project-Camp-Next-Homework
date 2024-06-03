@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import Sign from './pages/Sign';
-import TodoList from './pages/TodoList';
+import Todo from './pages/Todo';
 
 export default function App() {
   const [tab, setTab] = useState('sign');
@@ -27,7 +27,7 @@ export default function App() {
         </button>
       </div>
       {tab === 'sign' && <Sign />}
-      {tab === 'todolist' && <TodoList />}
+      {tab === 'todolist' && <Todo />}
     </article>
   );
 }
