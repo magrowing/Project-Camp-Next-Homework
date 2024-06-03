@@ -2,11 +2,21 @@ import { TTodo } from '../pages/Todo';
 
 type TodoItemProps = {
   todo: TTodo;
+  toggleTodo: (id: string) => void;
+  removeTodo: (id: string) => void;
 };
 
-export default function TodoItem({ todo }: TodoItemProps) {
-  // TODO : 토클 이벤트 처리
-  const onChangeHandler = () => {};
+export default function TodoItem(props: TodoItemProps) {
+  const { todo, toggleTodo, removeTodo } = props;
+
+  const onChangeHandler = () => {
+    toggleTodo(todo.id);
+  };
+
+  const onClickHandler = () => {
+    removeTodo(todo.id);
+  };
+
   return (
     <li className="relative flex items-center w-[100%] px-[1.5rem] py-[1rem] border border-primary rounded-md bg-opacity5">
       <input
@@ -28,6 +38,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
       <button
         type="button"
         className={`relative w-[2.4rem] h-[2.4rem] border border-primary text-[0] rounded-sm ml-auto bg-opacity10`}
+        onClick={onClickHandler}
       >
         삭제
         <span className={`icon-line -rotate-45`}></span>
