@@ -1,11 +1,11 @@
 import { ReactNode, useId } from 'react';
 
-type CheckBoxProps = {
+type CheckBoxProps = React.ComponentProps<'input'> & {
   children: ReactNode;
 };
 
-export default function CheckBox(prop: CheckBoxProps) {
-  const { children } = prop;
+export default function CheckBox(props: CheckBoxProps) {
+  const { children, ...restInputProps } = props;
   const uuid = useId();
   return (
     <div className="flex items-center relative">
@@ -13,6 +13,7 @@ export default function CheckBox(prop: CheckBoxProps) {
         type="checkbox"
         id={`input-${uuid}`}
         className={`appearance-none block w-[2rem] h-[2rem] border border-primary rounded-sm mr-[0.8rem] checked:bg-primary peer`}
+        {...restInputProps}
       />
       <svg
         className="

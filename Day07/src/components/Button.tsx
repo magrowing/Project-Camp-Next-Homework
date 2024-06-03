@@ -17,7 +17,7 @@ export default function Button(prop: ButtonProps) {
   return (
     <button
       style={style ?? { width: '100%' }}
-      className={`${BtnTypeVariants[btnStyleType]} h-[4.4rem] rounded-md border text-md border-primary`}
+      className={`${BtnTypeVariants[btnStyleType]} h-[4.4rem] rounded-md border text-md border-primary disabled:bg-gray-500 disabled:cursor-not-allowed`}
       {...restProps}
     >
       {children}
