@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 
 import Title from '../components/Title';
 import TodoEditor from '../components/TodoEditor';
@@ -12,23 +12,60 @@ export type TTodo = {
   completed: boolean;
 };
 
+type TAction = {
+  type: string;
+  value: string;
+};
+
+const reducer = (state: TTodo[], action: TAction) => {
+  switch (action.type) {
+    case 'ADD': {
+      return [{ id: uuidv4(), task: action.value, completed: false }, ...state];
+    }
+    case 'TOGGLE': {
+      return state.map((item) =>
+        item.id === action.value
+          ? { ...item, completed: !item.completed }
+          : item
+      );
+    }
+    case 'REMOVE': {
+      return state.filter((item) => item.id !== action.value);
+    }
+    default:
+      return state;
+  }
+};
+
 export default function Todo() {
-  const [todos, setTodos] = useState<TTodo[]>([]);
+  // const [todos, setTodos] = useState<TTodo[]>([]);
+  const [todos, dispatch] = useReducer(reducer, []);
 
   const addTodo = (task: string) => {
-    setTodos((prev) => [{ id: uuidv4(), task, completed: false }, ...prev]);
+    dispatch({
+      type: 'ADD',
+      value: task,
+    });
   };
 
   const toggleTodo = (id: string) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+    // setTodos(
+    //   todos.map((todo) =>
+    //     todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    //   )
+    // );
+    dispatch({
+      type: 'TOGGLE',
+      value: id,
+    });
   };
 
   const removeTodo = (id: string) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    // setTodos(todos.filter((todo) => todo.id !== id));
+    dispatch({
+      type: 'REMOVE',
+      value: id,
+    });
   };
 
   return (
