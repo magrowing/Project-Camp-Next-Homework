@@ -1,13 +1,84 @@
-import Checkbox from "./html/Checkbox";
+import { useState } from 'react';
 
-const TodoListItem = () => {
+import Checkbox from './html/Checkbox';
+import Input from './html/Input';
+
+import { useDispatchContext } from '../context/todoContext';
+
+import { TTodo } from '../type/todoType';
+
+type TodoListItemProps = {
+  todo: TTodo;
+};
+
+const TodoListItem = (props: TodoListItemProps) => {
+  const { todo } = props;
+  const dispatch = useDispatchContext();
+
+  const [edit, setEdit] = useState(false);
+  const [task, setTask] = useState('');
+
+  const onCheckChangeHandler = () => {
+    dispatch({ type: 'TOGGLE_TODO', payload: todo });
+  };
+
+  const onInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTask(e.target.value);
+  };
+
+  const onDeleteClickHandler = () => {
+    dispatch({ type: 'DELETED_TODO', payload: todo });
+  };
+
+  const onEditClickHandler = () => {
+    setEdit(!edit);
+
+    if (!edit) {
+      setTask(todo.task);
+    } else {
+      setTask(task);
+      dispatch({ type: 'EDIT_TODO', payload: { ...todo, task } });
+    }
+  };
+
   return (
     <>
       <li className="flex justify-between items-center py-[10px] px-[15px] bg-[rgba(53,56,62,0.05)] border border-[#4f4f4f] rounded-[4px]">
-        <Checkbox>
-          <span className={`line-through text-[#35383E]`}>Your Here..</span>
-        </Checkbox>
-        <button className="w-6 h-6 bg-[rgba(53,56,62,0.1)] border border-[#4F4F4F] rounded flex items-center justify-center">
+        {edit ? (
+          <Input
+            value={task}
+            onChange={onInputChangeHandler}
+            style={'w-[75%]'}
+          />
+        ) : (
+          <Checkbox checked={todo.completed} onChange={onCheckChangeHandler}>
+            <span
+              className={`${todo.completed && 'line-through'} text-[#35383E]`}
+            >
+              {todo.task}
+            </span>
+          </Checkbox>
+        )}
+        <button
+          className="w-6 h-6 bg-[rgba(53,56,62,0.1)] border border-[#4F4F4F] rounded flex items-center justify-center ml-auto"
+          onClick={onEditClickHandler}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M11.013 2.513a1.75 1.75 0 0 1 2.475 2.474L6.226 12.25a2.751 2.751 0 0 1-.892.596l-2.047.848a.75.75 0 0 1-.98-.98l.848-2.047a2.75 2.75 0 0 1 .596-.892l7.262-7.261Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+        <button
+          className="w-6 h-6 bg-[rgba(53,56,62,0.1)] border border-[#4F4F4F] rounded flex items-center justify-center ml-[10px]"
+          onClick={onDeleteClickHandler}
+        >
           <svg
             width="15"
             height="16"

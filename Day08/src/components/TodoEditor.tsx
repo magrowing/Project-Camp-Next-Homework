@@ -1,9 +1,15 @@
-import { useState } from "react";
-import Button from "./html/Button";
-import Input from "./html/Input";
+import { useState } from 'react';
+
+import Button from './html/Button';
+import Input from './html/Input';
+
+import { useDispatchContext } from '../context/todoContext';
+
+import { v4 as uuidv4 } from 'uuid';
 
 const TodoEditor = () => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
+  const dispatch = useDispatchContext();
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -11,7 +17,11 @@ const TodoEditor = () => {
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setText("");
+    dispatch({
+      type: 'ADD_TODO',
+      payload: { id: uuidv4(), task: text, completed: false },
+    });
+    setText('');
   };
   return (
     <>
@@ -22,7 +32,7 @@ const TodoEditor = () => {
           value={text}
           onChange={onChangeHandler}
         />
-        <Button type="submit" style={"w-[77px] bg-[#4F4F4F] text-white"}>
+        <Button type="submit" style={'w-[77px] bg-[#4F4F4F] text-white'}>
           Add
         </Button>
       </form>
