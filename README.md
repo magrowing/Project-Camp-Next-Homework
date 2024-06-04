@@ -7,3 +7,7 @@
 
 - `Day06`
   - [로그인,회원가입,TodoList UI 퍼블리싱 작업](https://github.com/magrowing/Project-Camp-Next-Homework/tree/main/Day06/homework-react-app)
+- `Day07`
+  - TodoList 복습 및 useState → useReducer 변경
+- `Day08`
+  - TodoList useReduce, Context API + 최적화
