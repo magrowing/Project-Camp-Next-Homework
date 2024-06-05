@@ -11,3 +11,5 @@
   - TodoList 복습 및 useState → useReducer 변경
 - `Day08`
   - TodoList useReduce, Context API + 최적화
+- `Day09`
+  - zustand + API 사용해서 TodoList 만들기
