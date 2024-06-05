@@ -1,9 +1,20 @@
+import { useEffect } from 'react';
+import { useTodoStore } from '../store/todoStore';
 import TodoItem from './TodoItem';
 
 export default function TodoList() {
+  const todos = useTodoStore((state) => state.todos);
+  const { getTodos } = useTodoStore((state) => state.action);
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+
   return (
     <ul className="flex flex-col items-center justify-center gap-[1.6rem]">
-      <TodoItem />
+      {todos.map((todo) => (
+        <TodoItem key={todo.id} todo={todo} />
+      ))}
     </ul>
   );
 }
