@@ -103,7 +103,31 @@ export const useDispatchContext = () => {
 
 `TodoContextProvider` 컴포넌트는 children 을 props로 전달받아 Context.Provider 컴포넌트들과 함께 렌더링 하는 역활을 한다.
 
-> 🤔 왜 이렇게 사용해야하지? 공식문서를 찾아보니, 공급하는 Provider의 갯수가 추가되게 되면 복잡해지니, 코드의 가독성 측면을 위해 사용하는 것이다. 굳이 이렇게 사용하지 않아도 된다. 그러나 확장을 생각한다면 해당 방법을 사용해도 될 것 같다.
+> ⭐️ 학습을 통해 새롭게 알게 된 방식 <br/> 기존에는 별도의 최상위 컴포넌트 없이 Provider 컴포넌트를 아래와 방식으로 사용했다.
+
+```jsx
+const Todo = () => {
+  return (
+    <>
+      <div className="w-[375px] bg-white py-10 px-6 text-[#4b4b4b]">
+        <h1 className="text-xl font-bold mb-[10px]"> Todo Into App</h1>
+        <p className="text-sm mb-5">Please enter your details to continue.</p>
+        <TodoStateContext.Provider value={todos}>
+          <TodoDispatchContext.Provider value={dispatch}>
+            {/* 등록 */}
+            <TodoEditor />
+            {/* 리스트 */}
+            <TodoList />
+          </TodoDispatchContext.Provider>
+        </TodoStateContext.Provider>
+      </div>
+    </>
+  );
+};
+export default Todo;
+```
+
+> 🤔 학습을 통해 최상위 컴포넌트를 생성하고 props의 children로 감싸줄 컴포넌트를 전달 받아 사용한다. 이유가 궁금해서 공식문서를 찾아보니, 공급하는 Provider의 갯수가 추가되게 되면 코드 복잡해지니, 코드의 가독성 측면을 위해 사용하는 것이다. 굳이 이렇게 사용하지 않아도 된다. 그러나 확장을 생각한다면 해당 방법을 사용해도 될 것 같다.
 
 - 🔗 [공식문서](https://react.dev/learn/scaling-up-with-reducer-and-context#moving-all-wiring-into-a-single-file)
 
@@ -121,7 +145,7 @@ export const TodoContextProvider = ({ children }: { children: ReactNode }) => {
 };
 ```
 
-#### 3-4. TodoContextProvider로 공급
+#### 3-4. TodoContextProvider로 공급받을 컴포넌트 감싸기
 
 ```jsx
 // Todo.tsx
@@ -218,19 +242,62 @@ const onDeleteClickHandler = () => {
 
 ### 7. 수정 버튼 기능 구현 추가 해보기
 
-수정 버튼 클릭시 입력창이 노출되고, 기존 할일이 노출되고
+#### 기능 구현
+
+- 토글에 따른 UI 변경
+- 수정 버튼 클릭시 input 수정할 수 있는 input form 노출
+- 변경할 수정사항 입력 후 버튼 클릭시 반영
+
+```jsx
+const [edit, setEdit] = useState(false);
+const [task, setTask] = useState('');
+```
+
+input의 입력할 값을 관리할 task 와 수정버튼 클릭시 toggle 되는 UI 구현을 위해 2가지 상태 추가 작업
+
+```jsx
+const onInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setTask(e.target.value);
+};
+
+const onEditClickHandler = () => {
+  setEdit(!edit);
+
+  if (!edit) {
+    setTask(todo.task);
+  } else {
+    setTask(task);
+    dispatch({ type: 'EDIT_TODO', payload: { ...todo, task } });
+  }
+};
+```
+
+input Change 핸들러와 수정 버튼 Click 핸들러 함수 생성했고, input의 입력값이 변경 될 때마다 e.target.value를 사용해 화면을 업데이트 해주었고, 수정버튼 클릭시 setEdit boolean 값 변경을 통해 UI 변경되어 input form 노출될 수 있도록 수정했고, 조건문으로 수정된 변경사항이 반영되도록 dispatch 함수의 action을 정의했다.
 
 <br/>
 
 ## 🤗 결과물
 
-|               Login                |               Sign               |                 TodoList                 |
-| :--------------------------------: | :------------------------------: | :--------------------------------------: |
-| ![Login UI](./image_src/login.png) | ![Sign UI](./image_src/sign.png) | ![TodoList UI](./image_src/todolist.png) |
+### 할일 추가
+
+![할일 추가](./image_src/add_todo.gif)
+
+### 체크박스 토글
+
+![체크박스 토글](./image_src/toggle_todo.gif)
+
+### 할일 삭제
+
+![할일 삭제](./image_src/delete_todo.gif)
+
+### 할일 수정
+
+![할일 수정](./image_src/edit_todo.gif)
 
 <br/>
 
-## 🔥 과제 회고
+## 🔥 복습 회고
 
-Tailwind CSS 의 공식문서를 열심히 찾아보았고, 해당 프레임워크가 제공하는 기능을 최대한 활용해보고자 했다.
-디자인 시스템인 Theme 정의하고, 자주 사용될거 같아보이는 부분은 custom class를 생성했으며 동적인 Class 적용도 시도해보았다. 아직 완벽하게 사용법을 익히지는 못해서 추가적으로 다른 프로젝트를 진행해보면서 더 시도해보려고 한다.
+useReducer는 상태변화 함수를 컴포넌트 내부가 아닌 외부에서 관리 할 수 있다는 점에서 유용하다고 생각된다.
+나중에 전역상태관리 라이브러리의 토대가 되는 개념이라서 (Redux, zustand) 익숙해지려고 여러번 TodoList를 만들어 보았다. 리액트는 단뱡향 흐르는 데이터 흐름을 가지고 있어, 상위 컴포넌트에서 하위 컴포넌트로 props를 통해 상태를 전달받는다. 그러나, 계층구조의 깊이감이 깊어지면 props의 전달에서의 불필요한 상황이 발생된다. Props Drilling 때문에 상태를 전역적으로 관리해야하는 필요성에 의해 React는 Context API를 제공해준다. 그러나 Context API는 최적화 작업도 함께 해주어야 한다.
+Provider를 통해 공급해주는 상태가 변경된다면 Provider로 감싸고 있는 컴포넌트의 불필요한 렌더링 상황이 발생 될 수 있기 때문이다.
