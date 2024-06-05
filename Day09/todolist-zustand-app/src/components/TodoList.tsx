@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import { useTodoStore } from '../store/todoStore';
+
 import TodoItem from './TodoItem';
+
+import { useTodoStore } from '../store/todoStore';
 
 export default function TodoList() {
   const todos = useTodoStore((state) => state.todos);

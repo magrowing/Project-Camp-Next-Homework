@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { ReactNode, memo } from 'react';
 
 import { RecordType } from '../types';
 
@@ -13,7 +14,7 @@ const BtnTypeVariants: RecordType = {
   line: 'bg-white text-primary',
 };
 
-export default function Button(prop: ButtonProps) {
+function Button(prop: ButtonProps) {
   const { children, btnStyleType, style, ...restProps } = prop;
   return (
     <button
@@ -26,3 +27,5 @@ export default function Button(prop: ButtonProps) {
     </button>
   );
 }
+
+export default memo(Button);

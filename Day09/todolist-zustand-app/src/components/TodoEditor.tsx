@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import TextField from './TextField';
 import Button from './Button';
+
 import { useTodoStore } from '../store/todoStore';
 
 export default function TodoEditor() {
@@ -13,18 +14,26 @@ export default function TodoEditor() {
   };
 
   const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!task) return;
+    if (e.nativeEvent.isComposing) return; // IME 이슈로 이벤트 두번 발생 막기
     if (e.key === 'Enter') {
-      onSubmitHandler();
+      addTodo(task.trim());
+      setTask('');
     }
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!task) return;
     addTodo(task);
     setTask('');
   };
 
   return (
-    <div className="flex items-center justify-center gap-[0.8rem] mb-[1.6rem]">
+    <form
+      className="flex items-center justify-center gap-[0.8rem] mb-[1.6rem]"
+      onSubmit={onSubmitHandler}
+    >
       <TextField
         style={'flex-1'}
         placeholder="Enter Todo List"
@@ -32,14 +41,9 @@ export default function TodoEditor() {
         onChange={onChangeHandler}
         onKeyDown={onKeyDownHandler}
       />
-      <Button
-        type="button"
-        style={'w-[7.7rem]'}
-        btnStyleType="full"
-        onClick={onSubmitHandler}
-      >
+      <Button type="submit" style={'w-[7.7rem]'} btnStyleType="full">
         Add
       </Button>
-    </div>
+    </form>
   );
 }

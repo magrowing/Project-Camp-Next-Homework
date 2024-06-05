@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { memo, useState } from 'react';
 
 import TextField from './TextField';
 
@@ -10,7 +11,7 @@ type TodoItemProps = {
   todo: Todo;
 };
 
-export default function TodoItem({ todo }: TodoItemProps) {
+function TodoItem({ todo }: TodoItemProps) {
   const [edit, setEdit] = useState(false);
   const [text, setText] = useState('');
 
@@ -96,3 +97,5 @@ export default function TodoItem({ todo }: TodoItemProps) {
     </li>
   );
 }
+
+export default memo(TodoItem);
