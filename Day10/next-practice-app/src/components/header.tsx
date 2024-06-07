@@ -14,14 +14,6 @@ const pathList = [
     name: '상품 목록',
   },
   {
-    path: '/products/:id',
-    name: '상품 목록',
-  },
-  {
-    path: '/products/:id',
-    name: '상품 상세',
-  },
-  {
     path: '/cart',
     name: '장바구니',
   },
@@ -36,10 +28,6 @@ const pathList = [
   {
     path: '/orders',
     name: '주문 목록',
-  },
-  {
-    path: '/orders/:id',
-    name: '주문 상세 페이지',
   },
   {
     path: '/login',
@@ -63,7 +51,7 @@ export default function Header() {
         <ul className="flex flex-row items-center justify-center gap-4 mb-4">
           {pathList.map((item) => (
             <li
-              key={`nav-${item}`}
+              key={`nav-${item.path}`}
               className={`${pathName === item.path ? 'font-bold' : ''}`}
             >
               <Link href={item.path}>
