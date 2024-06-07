@@ -13,14 +13,14 @@ export default function TodoEditor() {
     setTask(e.target.value);
   };
 
-  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!task) return;
-    if (e.nativeEvent.isComposing) return; // IME 이슈로 이벤트 두번 발생 막기
-    if (e.key === 'Enter') {
-      addTodo(task.trim());
-      setTask('');
-    }
-  };
+  // const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (!task) return;
+  //   if (e.nativeEvent.isComposing) return; // IME 이슈로 이벤트 두번 발생 막기
+  //   if (e.key === 'Enter') {
+  //     addTodo(task.trim());
+  //     setTask('');
+  //   }
+  // };
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +39,6 @@ export default function TodoEditor() {
         placeholder="Enter Todo List"
         value={task}
         onChange={onChangeHandler}
-        onKeyDown={onKeyDownHandler}
       />
       <Button type="submit" style={'w-[7.7rem]'} btnStyleType="full">
         Add

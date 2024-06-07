@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
+
 import Title from '../components/Title';
 import TodoEditor from '../components/TodoEditor';
 import TodoList from '../components/TodoList';
 
+import { useTodoStore } from '../store/todoStore';
+
 export default function Todo() {
+  const { getTodos } = useTodoStore((state) => state.action);
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+
   return (
     <section className="section-wrapper">
       <div>
